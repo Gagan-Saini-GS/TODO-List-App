@@ -1,47 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TO DO List</title>
-    <link rel="stylesheet" href="css/styles.css" />
+<!-- By including header and footer in all ejs files I have same styles accorss the website -->
+<!-- and I don't have to copy-paste codes -->
+<!-- And this is called layouts in ejs. (very useful) -->
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<%- include("header") -%>
 
-  <!-- This is a ejs (embedded JavaScript) files.-->
-  <!-- And used to make html templates -->
-  <!-- For documentation visit ejs -->
+<div class="box" id="heading">
+  <h1><%= listTitle %></h1>
+</div>
 
-  <body>
-    <div class="box" id="heading">
-      <h1><%= kindOfDay %></h1>
-    </div>
+<div class="box">
+  <% for(var i=0;i < newListItems.length; i++){ %>
+  <div class="item">
+    <input type="checkbox" />
+    <p><%= newListItems[i] %></p>
+  </div>
+  <% } %>
 
-    <div class="box">
-      <% for(var i=0;i < newListItems.length; i++){ %>
-      <div class="item">
-        <input type="checkbox" />
-        <p><%= newListItems[i] %></p>
-      </div>
-      <% } %>
+  <form class="item" action="/" method="post">
+    <input type="text" name="listItem" placeholder="To Do" autocomplete="off" />
+    <button type="submit" name="list" value="<%= listTitle %>">+</button>
+  </form>
+</div>
 
-      <form class="item" action="/" method="post">
-        <input
-          type="text"
-          name="listItem"
-          placeholder="To Do"
-          autocomplete="off"
-        />
-        <button type="submit" name="button">+</button>
-      </form>
-    </div>
-  </body>
-</html>
+<%- include("footer") -%>
